@@ -1,10 +1,28 @@
+/**
+ * @file Vending machine change calculator
+ *
+ * @requires process
+ */
 const process = require("process");
 
+/**
+ * Logs the command line arguments passed to the script
+ */
 console.log(process.argv);
 
+/**
+ * @type {null}
+ */
 let itemCostInput = null;
+/**
+ * @type {null}
+ */
 let paymentInput = null;
 
+/**
+ * Iterates over the command line arguments, looking for the "--itemCost" and "--payment" arguments.
+ * If found, sets the corresponding input variable and increments the iterator.
+ */
 for (let i = 0; i < process.argv.length; i++) {
   const arg = process.argv[i];
   if (arg === "--itemCost") {
@@ -16,31 +34,67 @@ for (let i = 0; i < process.argv.length; i++) {
   }
 }
 
+/**
+ * If the item cost input is null, logs an error message and exits the script with status code 1.
+ */
 if (itemCostInput == null) {
   console.error("--item-cost must be provided");
   process.exit(1);
 }
 
+/**
+ * Converts the item cost input to a number and multiplies by 100.
+ * @type {number}
+ */
 const itemCost = Number(itemCostInput) * 100;
+/**
+ * If the item cost input is not a number, logs an error message and exits the script with status code 1.
+ */
 if (isNaN(itemCost)) {
   console.log("--item-cost must be a number");
   process.exit(1);
 }
 
+/**
+ * If the payment input is null, logs an error message and exits the script with status code 1.
+ */
 if (paymentInput == null) {
   console.error("--payment must be provided");
   process.exit(1);
 }
 
+/**
+ * Converts the payment input to a number and multiplies by 100.
+ * @type {number}
+ */
 const payment = Number(paymentInput) * 100;
+/**
+ * If the payment input is not a number, logs an error message and exits the script with status code 1.
+ */
 if (isNaN(payment)) {
   console.log("--payment must be a number");
   process.exit(1);
 }
 
-//Start of Vending Machine Code
+/**
+ * @function calculateChange
+ *
+ * @param {number} price - cost of the item
+ * @param {number} amountPaid - amount paid
+ *
+ * @returns {string} - console.log the change in terms of quarters, dimes, nickels, pennies and the total change
+ */
 
-// This is the function that calculates the change.
+/**
+
+@function calculateChange
+
+@param {number} price - The price of the item being purchased.
+
+@param {number} amountPaid - The amount paid by the customer.
+
+@returns {void} - This function calculates the change due to a customer and outputs the number of each coin needed to make change and the total change in the console.
+*/
 function calculateChange(price, amountPaid) {
   let change = amountPaid - price;
   let quarters = 0;
